@@ -1,9 +1,9 @@
 module("tribr_multi_image_select");
 
 // In this test we call the example showAlert API method with an example string
-asyncTest("Attempt to show an alert with no text", 1, function() {
-	forge.tribr_multi_image_select.showAlert("Hello, testing world!", function () {
-		askQuestion("Did you see an alert with the message 'Hello, testing world!'?", {
+asyncTest("Attempt to select images", 1, function() {
+	forge.tribr_multi_image_select.getImages(function (images) {
+		askQuestion("Are these the images you selected: " + JSON.stringify(images), {
 			Yes: function () {
 				ok(true, "User claims success");
 				start();
