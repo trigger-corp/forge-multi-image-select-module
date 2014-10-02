@@ -7,7 +7,7 @@
 //
 
 #import "tribr_multi_image_select_API.h"
-
+#import <MobileCoreServices/MobileCoreServices.h>
 
 /**
  * tribr_multi_image_select_API
@@ -15,23 +15,17 @@
 @implementation tribr_multi_image_select_API
 
 + (void) getImages:(ForgeTask*)task {
-	tribr_multi_image_select_API *api = ((tribr_multi_image_select_API*)task.self);
-    
-    NSBundle *pickerBundle = [NSBundle bundleWithPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"tribr_multi_image_select.bundle"]];
-    
-	ELCAlbumPickerController *albumController = [[ELCAlbumPickerController alloc] initWithNibName:@"ELCAlbumPickerController" bundle:pickerBundle];
-	ELCImagePickerController *pickerController = [[ELCImagePickerController alloc] initWithRootViewController:albumController];
-	[albumController setParent:pickerController];
-
-	api->pickerDelegate = [[ImagePickerDelegate alloc] initWithTask: task];
-	[pickerController setDelegate:api->pickerDelegate];
-	
-	AppDelegate *app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-	[app.viewController presentModalViewController:pickerController animated:YES];
+    ELCImagePickerController *pickerController = [[ELCImagePickerController alloc] initImagePicker];
+    pickerController.maximumImagesCount = 100;
+    pickerController.returnsOriginalImage = YES; // fullscreen vs fullres
+    pickerController.returnsImage = NO; // uiimage or image location
+    pickerController.onOrder = YES;
+    pickerController.mediaTypes = @[(NSString*)kUTTypeImage];
+    pickerController.imagePickerDelegate = [[ImagePickerDelegate alloc] initWithTask:task];
+    [[[ForgeApp sharedApp] viewController] presentViewController:pickerController animated:YES completion:nil];
 }
 
 @end
-
 
 
 /**
@@ -49,7 +43,7 @@
 #pragma mark ELCImagePickerControllerDelegate Methods
 
 - (void) elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info {
-	[picker dismissModalViewControllerAnimated:YES];
+	[picker dismissViewControllerAnimated:YES completion:nil];
 	
 	NSMutableArray *images = [NSMutableArray arrayWithCapacity:2];
 	
@@ -64,18 +58,8 @@
 }
 
 - (void) elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker {
-	[picker dismissModalViewControllerAnimated:YES];
+    [picker dismissViewControllerAnimated:YES completion:nil];
 	[task success:[NSMutableArray arrayWithCapacity:0]];
 }
 
 @end
-
-
-
-/**
- * AppDelegate
- */
-@implementation AppDelegate
-@synthesize viewController;
-@end
-

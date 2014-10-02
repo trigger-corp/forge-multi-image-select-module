@@ -10,28 +10,18 @@
 #import <ELCImagePickerFramework/ELCImagePickerController.h>
 #import <ELCImagePickerFramework/ELCAlbumPickerController.h>
 
+@interface tribr_multi_image_select_API : NSObject
 
-// ImagePickerDelegate
++ (void) getImages:(ForgeTask*)task;
+
+@end
+
+
 @interface ImagePickerDelegate : UIViewController <ELCImagePickerControllerDelegate> {
 	ForgeTask *task;
 }
 - (ImagePickerDelegate*) initWithTask:(ForgeTask*)task;
-@end
 
-
-// tribr_multi_image_select_API
-@interface tribr_multi_image_select_API : NSObject {
-	ImagePickerDelegate *pickerDelegate;
-}
-+ (void) getImages:(ForgeTask*)task;
-@end
-
-
-// AppDelegate
-@interface AppDelegate : NSObject <UIApplicationDelegate> {
-	ImagePickerDelegate *viewController;
-}
-@property (nonatomic, retain) IBOutlet ImagePickerDelegate *viewController;
 @end
 
 
