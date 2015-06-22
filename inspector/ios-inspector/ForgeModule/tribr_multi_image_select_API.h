@@ -7,8 +7,8 @@
 //
 
 
-#import <ELCImagePickerFramework/ELCImagePickerController.h>
-#import <ELCImagePickerFramework/ELCAlbumPickerController.h>
+#import "ELCImagePickerFramework/ELCImagePickerController.h"
+#import "ELCImagePickerFramework/ELCAlbumPickerController.h"
 
 @interface tribr_multi_image_select_API : NSObject
 
