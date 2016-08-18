@@ -5,5 +5,9 @@
 				"framework": "MobileCoreServices.framework"
 			}
 		}
-	}
+	},
+	{ "do": { "set_in_info_plist": {
+		"key": "NSPhotoLibraryUsageDescription",
+		"value": "{{modules.tribr_multi_image_select.config.usage_description}}"
+	} } }
 ]
