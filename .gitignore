@@ -34,7 +34,6 @@ inspector/an-inspector/ForgeModule/.settings
 inspector/an-inspector/ForgeModule/AndroidManifest.xml
 inspector/an-inspector/ForgeModule/libs
 inspector/an-inspector/ForgeModule/project.properties
-inspector/an-inspector/ForgeModule/res
 inspector/an-inspector/ForgeModule/trigger-gen
 inspector/ios-inspector.*
 inspector/ios-inspector/ForgeCore.bundle/

@@ -1,8 +1,13 @@
 {
-	"this_module": {
-		"config": {
-			"usage_description": "This app would like to select many pictures of your birthday."
-		}
-	},
-	"modules": {}
+    "this_module": {
+        "config": {}
+    },
+    "modules": {
+        "file": {
+            "version": "2.17",
+            "config": {
+                "usage_description": "This app would like to look at pictures of your birthday."
+            }
+        }
+    }
 }

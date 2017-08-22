@@ -1,8 +1,13 @@
 {
-	"changes": "* Update module code for iOS 10.\n* New mandatory configuration field `usage_description` to describe the reason your app acceses the user's photo library on iOS 10 devices.",
-	"description": "Multiple image selector.",
-	"min_platform_version": "v2.4.5",
-	"namespace": "tribr_multi_image_select",
-	"platform_version": "v2.4.5",
-	"version": "1.3"
+    "changes": "* Fix Android permissions.\n* Add `file` module as a dependency.",
+    "description": "Multiple image selector.",
+    "min_platform_version": "v2.5.5",
+    "namespace": "tribr_multi_image_select",
+    "platform_version": "v2.5.5",
+    "version": "1.4",
+    "dependencies": {
+        "file": {
+            "minimum_version": "2.17"
+        }
+    }
 }

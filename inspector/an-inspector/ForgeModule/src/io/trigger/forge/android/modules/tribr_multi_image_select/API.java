@@ -1,5 +1,6 @@
 package io.trigger.forge.android.modules.tribr_multi_image_select;
 
+import io.trigger.forge.android.core.ForgeActivity;
 import io.trigger.forge.android.core.ForgeApp;
 import io.trigger.forge.android.core.ForgeTask;
 
@@ -8,6 +9,7 @@ import java.util.Vector;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import android.Manifest;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -28,9 +30,28 @@ import android.widget.TextView;
 
 public class API {
 	static View lastView = null;
+
 	public static void getImages(final ForgeTask task) {
+        ForgeApp.getActivity().requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE, new ForgeActivity.EventAccessBlock() {
+            @Override
+            public void run(boolean granted) {
+                if (!granted) {
+                    task.error("Permission denied. User didn't grant access to storage.", "EXPECTED_FAILURE", null);
+                    return;
+                }
+                ForgeApp.getActivity().requestPermission("com.google.android.apps.photos.permission.GOOGLE_PHOTOS", new ForgeActivity.EventAccessBlock() {
+                    @Override
+                    public void run(boolean granted) {
+                        // ignore 'granted' as not all devices have this permission and there does not seem to be a way to check for it
+                        API.getImagesWithPermissions(task);
+                    }
+                });
+            }
+        });
+	}
+
+	public static void getImagesWithPermissions(final ForgeTask task) {
 		task.performUI(new Runnable() {
-			
 			public void run() {
 				final Vector<LazyImageView> images = new Vector<LazyImageView>();			
 				final Vector<CheckBox> checkboxes = new Vector<CheckBox>();
