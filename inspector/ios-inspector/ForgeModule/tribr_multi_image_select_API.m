@@ -25,6 +25,17 @@
     [[[ForgeApp sharedApp] viewController] presentViewController:pickerController animated:YES completion:nil];
 }
 
++ (void) getVideos:(ForgeTask*)task {
+    ELCImagePickerController *pickerController = [[ELCImagePickerController alloc] initImagePicker];
+    pickerController.maximumImagesCount = 100;
+    pickerController.returnsOriginalImage = YES; // fullscreen vs fullres
+    pickerController.returnsImage = NO; // uiimage or image location
+    pickerController.onOrder = YES;
+    pickerController.mediaTypes = @[(NSString*)kUTTypeMovie];
+    pickerController.imagePickerDelegate = [[ImagePickerDelegate alloc] initWithTask:task];
+    [[[ForgeApp sharedApp] viewController] presentViewController:pickerController animated:YES completion:nil];
+}
+
 @end
 
 
@@ -50,7 +61,11 @@
 	for (NSDictionary *dict in info) {
 		NSMutableDictionary *file = [NSMutableDictionary dictionaryWithCapacity:2];
 		[file setValue:[[dict objectForKey:UIImagePickerControllerReferenceURL] absoluteString] forKey:@"uri"];
-		[file setValue:@"image" forKey:@"type"];
+        if ([picker.mediaTypes containsObject:(NSString *)kUTTypeMovie]) {
+            [file setValue:@"video" forKey:@"type"];
+        } else {
+            [file setValue:@"image" forKey:@"type"];
+        }
 		[images addObject:file];
 	}
 

@@ -2,5 +2,8 @@
 forge.tribr_multi_image_select = {
     getImages: function (success, error) {
         forge.internal.call('tribr_multi_image_select.getImages', {}, success, error);
+    },
+    getVideos: function (success, error) {
+        forge.internal.call('tribr_multi_image_select.getVideos', {}, success, error);
     }
 };
