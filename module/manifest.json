@@ -1,13 +1,8 @@
 {
     "changes": "* New method: `getVideos()` (iOS only)\n* Fix Android permissions.\n* Add `file` module as a dependency.",
     "description": "Multiple image selector.",
-    "min_platform_version": "v2.5.5",
+    "min_platform_version": "v2.6.1",
     "namespace": "tribr_multi_image_select",
-    "platform_version": "v2.5.5",
-    "version": "1.4",
-    "dependencies": {
-        "file": {
-            "minimum_version": "2.17"
-        }
-    }
+    "platform_version": "v2.6.1",
+    "version": "1.4"
 }
