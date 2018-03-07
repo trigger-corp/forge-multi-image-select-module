@@ -1,8 +1,8 @@
 {
-    "changes": "* New method: `getVideos()` (iOS only)\n* Fix Android permissions.\n* Add `file` module as a dependency.",
+    "changes": "* Fixed: Some newer Android devices with large photo libraries would crash during image selection.",
     "description": "Multiple image selector.",
-    "min_platform_version": "v2.6.1",
+    "min_platform_version": "v2.6.5",
     "namespace": "tribr_multi_image_select",
-    "platform_version": "v2.6.1",
-    "version": "1.4"
+    "platform_version": "v2.6.5",
+    "version": "1.5"
 }
