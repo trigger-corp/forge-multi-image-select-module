@@ -93,7 +93,11 @@ public class API {
 				scroll.addView(layout);
 				
 				@SuppressWarnings("deprecation")
-				Cursor cursor = ForgeApp.getActivity().managedQuery(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, new String[] { ImageColumns._ID }, null, null, null);
+				Cursor cursor = ForgeApp.getActivity().managedQuery(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                                                                    new String[] { ImageColumns._ID },
+                                                                    null,
+                                                                    null,
+                                                                    MediaStore.Images.Media._ID + " DESC");
 				
 				Bitmap placeholder = BitmapFactory.decodeResource(ForgeApp.getActivity().getResources(), ForgeApp.getResourceId("multi_image_select_loading", "drawable"));
 				placeholder = Bitmap.createScaledBitmap(placeholder, 200, 200, true);
