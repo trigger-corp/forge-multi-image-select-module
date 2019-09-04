@@ -1,5 +1,5 @@
 //
-//	tribr_multi_image_select_API.h
+//	gallery_API.h
 //	ForgeInspector
 //
 //	Created by Antoine van Gelder on 27/11/2012.
@@ -10,7 +10,7 @@
 #import "ELCImagePickerFramework/ELCImagePickerController.h"
 #import "ELCImagePickerFramework/ELCAlbumPickerController.h"
 
-@interface tribr_multi_image_select_API : NSObject
+@interface gallery_API : NSObject
 
 + (void) getImages:(ForgeTask*)task;
 

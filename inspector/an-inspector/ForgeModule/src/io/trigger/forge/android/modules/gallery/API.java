@@ -1,4 +1,4 @@
-package io.trigger.forge.android.modules.tribr_multi_image_select;
+package io.trigger.forge.android.modules.gallery;
 
 import io.trigger.forge.android.core.ForgeActivity;
 import io.trigger.forge.android.core.ForgeApp;
@@ -51,6 +51,8 @@ public class API {
 	}
 
 	public static void getImagesWithPermissions(final ForgeTask task) {
+		float density = ForgeApp.getActivity().getApplicationContext().getResources().getDisplayMetrics().density;
+
 		task.performUI(new Runnable() {
 			public void run() {
 				final Vector<LazyImageView> images = new Vector<LazyImageView>();			
@@ -63,7 +65,7 @@ public class API {
 				lastView = container;
 
 				TextView title = new TextView(ForgeApp.getActivity());
-				title.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, 50));
+				title.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, (int)(50 * density)));
 				title.setGravity(Gravity.CENTER);
 				title.setTextSize(20);
 				title.setTextColor(Color.rgb(49, 49, 49));
@@ -84,7 +86,7 @@ public class API {
 				};
 
 				RelativeLayout.LayoutParams scrollLayout = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-				scrollLayout.setMargins(0, 50, 0, 100);
+				scrollLayout.setMargins(0, (int)(50 * density), 0, (int)(100 * density));
 				scroll.setLayoutParams(scrollLayout);
 				container.addView(scroll);
 
@@ -142,7 +144,7 @@ public class API {
 				curLayout.setPadding(0, 0, 0, 10);
 				
 				LinearLayout buttons = new LinearLayout(ForgeApp.getActivity());
-				RelativeLayout.LayoutParams buttonsLayout = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, 100);
+				RelativeLayout.LayoutParams buttonsLayout = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, 200);
 				buttonsLayout.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 				buttons.setLayoutParams(buttonsLayout);
 				buttons.setPadding(10, 10, 10, 0);

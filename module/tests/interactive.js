@@ -1,7 +1,9 @@
-module("tribr_multi_image_select");
+/* global forge, asyncTest, askQuestion, ok, start */
+
+module("gallery");
 
 asyncTest("Attempt to select images", 1, function() {
-    forge.tribr_multi_image_select.getImages(function (images) {
+    forge.gallery.getImages(function (images) {
         askQuestion("Are these the images you selected: " + JSON.stringify(images), {
             Yes: function () {
                 ok(true, "User claims success");
@@ -21,7 +23,7 @@ asyncTest("Attempt to select images", 1, function() {
 
 if (forge.is.ios()) {
     asyncTest("Attempt to select videos", 1, function() {
-        forge.tribr_multi_image_select.getVideos(function (videos) {
+        forge.gallery.getVideos(function (videos) {
             askQuestion("Are these the videos you selected: " + JSON.stringify(videos), {
                 Yes: function () {
                     ok(true, "User claims success");

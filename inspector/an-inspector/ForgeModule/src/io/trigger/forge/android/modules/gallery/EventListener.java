@@ -1,4 +1,4 @@
-package io.trigger.forge.android.modules.tribr_multi_image_select;
+package io.trigger.forge.android.modules.gallery;
 
 import android.view.KeyEvent;
 import io.trigger.forge.android.core.ForgeApp;

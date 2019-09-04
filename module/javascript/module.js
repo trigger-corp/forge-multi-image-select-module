@@ -1,9 +1,10 @@
-// Expose the native API to javascript
-forge.tribr_multi_image_select = {
+/* global forge */
+
+forge.gallery = {
     getImages: function (success, error) {
-        forge.internal.call('tribr_multi_image_select.getImages', {}, success, error);
+        forge.internal.call("gallery.getImages", {}, success, error);
     },
     getVideos: function (success, error) {
-        forge.internal.call('tribr_multi_image_select.getVideos', {}, success, error);
+        forge.internal.call("gallery.getVideos", {}, success, error);
     }
 };
