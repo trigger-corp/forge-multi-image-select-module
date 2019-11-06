@@ -1,9 +1,4 @@
 [
-    {
-        "do": {
-            "add_ios_system_framework": {
-                "framework": "MobileCoreServices.framework"
-            }
-        }
-    }
+    { "do": { "add_ios_system_framework": "MobileCoreServices.framework" } },
+    { "do": { "add_ios_system_framework": "Photos.framework" } }
 ]
