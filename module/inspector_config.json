@@ -4,11 +4,16 @@
     },
     "modules": {
         "file": {
+            "disabled": true,
             "version": "2.24",
             "config": {
                 "usage_description": "This app would like to look at pictures of your birthday."
-            },
-            "disabled": false
+            }
+        },
+        "request": {
+            "disabled": true,
+            "version": "2.11",
+            "config": {}
         }
     }
 }
