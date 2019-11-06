@@ -1,8 +1,8 @@
 {
-    "changes": "* Renamed `tribr_multi_image_select` module to `gallery`",
+    "changes": "* Fixed: App freezes when selecting images on pre iOS 13 devices\n* Fixed: Images contain no data on iOS 13",
     "description": "Gallery viewer and multiple image selection.",
     "min_platform_version": "v2.8.0",
     "namespace": "gallery",
-    "platform_version": "v2.8.0",
-    "version": "2.0"
+    "platform_version": "v2.8.3",
+    "version": "2.1"
 }
