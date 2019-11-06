@@ -5,8 +5,12 @@
 //	Copyright (c) 2012 Trigger Corp. All rights reserved.
 //
 
-#import "gallery_API.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import <MobileCoreServices/UTCoreTypes.h>
+#import <Photos/Photos.h>
+
+#import "gallery_API.h"
+
 
 /**
  * gallery_API
@@ -64,26 +68,43 @@
     return self;
 }
 
+
 #pragma mark ELCImagePickerControllerDelegate Methods
 
-- (void) elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info {
+- (void) elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray*)selection {
     [picker dismissViewControllerAnimated:YES completion:nil];
 
-    NSMutableArray *images = [NSMutableArray arrayWithCapacity:2];
+    NSMutableArray *files = [NSMutableArray arrayWithCapacity:selection.count];
 
-    for (NSDictionary *dict in info) {
-        NSMutableDictionary *file = [NSMutableDictionary dictionaryWithCapacity:2];
-        [file setValue:[[dict objectForKey:UIImagePickerControllerReferenceURL] absoluteString] forKey:@"uri"];
-        if ([picker.mediaTypes containsObject:(NSString *)kUTTypeMovie]) {
-            [file setValue:@"video" forKey:@"type"];
-        } else {
-            [file setValue:@"image" forKey:@"type"];
+    for (NSDictionary *item in selection) {
+        // get PHAsset for selection
+        NSURL *referenceURL = [item objectForKey:UIImagePickerControllerReferenceURL];
+        PHFetchResult *result = [PHAsset fetchAssetsWithALAssetURLs:@[referenceURL] options:nil];
+        PHAsset *asset = [result firstObject];
+        if (asset == nil) {
+            [task error:[NSString stringWithFormat:@"Could not locate asset with reference url: %@", [referenceURL absoluteString]]];
+            return;
         }
-        [images addObject:file];
+
+        // construct a ForgeFile from PHAsset
+        if (asset.mediaType == PHAssetMediaTypeImage) {
+            [files addObject:@{
+                @"uri": [NSString stringWithFormat:@"photo-library://image/%@?ext=JPG", [asset localIdentifier]],
+                @"type": @"image"
+            }];
+        } else if (asset.mediaType == PHAssetMediaTypeVideo) {
+            [files addObject:@{
+                @"uri": [NSString stringWithFormat:@"photo-library://video/%@?ext=MOV", [asset localIdentifier]],
+                @"type": @"video"
+            }];
+        } else {
+            [task error:[NSString stringWithFormat:@"Invalid media type for reference url: %@ -> %ld", [referenceURL absoluteString], (long)asset.mediaType]];
+        }
     }
 
-    [task success:images];
+    [task success:files];
 }
+
 
 - (void) elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:nil];
