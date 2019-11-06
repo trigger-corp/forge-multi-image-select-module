@@ -21,6 +21,13 @@
     pickerController.onOrder = YES;
     pickerController.mediaTypes = @[(NSString*)kUTTypeImage];
     pickerController.imagePickerDelegate = [[ImagePickerDelegate alloc] initWithTask:task];
+
+    if (@available(iOS 13.0, *)) {
+        pickerController.modalPresentationStyle = UIModalPresentationAutomatic;
+    } else {
+        // Spectacularly, as of iOS 13, earlier versions fail with the default modalPresentationStyle.
+        pickerController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    }
     [[[ForgeApp sharedApp] viewController] presentViewController:pickerController animated:YES completion:nil];
 }
 
@@ -32,6 +39,13 @@
     pickerController.onOrder = YES;
     pickerController.mediaTypes = @[(NSString*)kUTTypeMovie];
     pickerController.imagePickerDelegate = [[ImagePickerDelegate alloc] initWithTask:task];
+    
+    if (@available(iOS 13.0, *)) {
+        pickerController.modalPresentationStyle = UIModalPresentationAutomatic;
+    } else {
+        // Spectacularly, as of iOS 13, earlier versions fail with the default modalPresentationStyle.
+        pickerController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    }
     [[[ForgeApp sharedApp] viewController] presentViewController:pickerController animated:YES completion:nil];
 }
 
